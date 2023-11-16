@@ -4,10 +4,9 @@ VALUES (1, 'Rafael Moreira Silva Costa');
 
 -- Inserir horários para o Professor 1 (Rafael Moreira Silva Costa)
 INSERT INTO Karate.HorariosAula (Id_Prof, DiaSemana, HorarioInicio)
-VALUES (1, 1, '11:00:00'), -- Segunda-feira às 11:00
-       (1, 1, '18:00:00'), -- Segunda-feira às 18:00
-       (1, 3, '11:00:00'), -- Quarta-feira às 11:00
-       (1, 3, '18:00:00'); -- Quarta-feira às 18:00
+ VALUES 
+       (1, 'Segunda-Feira', '18:00:00'), -- Segunda-feira às 18:00
+       (1,'Quarta-Feira', '18:00:00'); -- Quarta-feira às 18:00
 
 -- Inserir dados do Professor 2 (Roger Otávio Nemo)
 INSERT INTO Karate.Professor (Id_Prof, Nome)
@@ -15,12 +14,10 @@ VALUES (2, 'Roger Otávio Nemo');
 
 -- Inserir horários para o Professor 2 (Roger Otávio Nemo)
 INSERT INTO Karate.HorariosAula (Id_Prof, DiaSemana, HorarioInicio)
-VALUES (2, 2, '11:00:00'), -- Terça-feira às 11:00
-       (2, 2, '18:00:00'), -- Terça-feira às 18:00
-       (2, 4, '11:00:00'), -- Quinta-feira às 11:00
-       (2, 4, '18:00:00'), -- Quinta-feira às 18:00
-       (2, 5, '11:00:00'), -- Sexta-feira às 11:00
-       (2, 5, '18:00:00'); -- Sexta-feira às 18:00
+VALUES
+       (2,'Terça-Feira', '19:00:00'), -- Terça-feira às 18:00
+       (2, 'Quinta-Feira', '19:00:00'), -- Quinta-feira às 18:00
+       (2, 'Sexta-Feira', '19:30:00'); -- Sexta-feira às 18:00
 
 
 
@@ -53,3 +50,8 @@ where Id_Prof = 1
 Update Karate.HorariosAula
 set Turma = 'B'
 where Id_Prof = 2
+
+
+
+delete from Karate.HorariosAula
+where id_Horario BETWEEN 11 and 20

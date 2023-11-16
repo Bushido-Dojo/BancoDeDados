@@ -6,14 +6,19 @@ CREATE TABLE Karate.Faixa (
 );
 
 CREATE TABLE Karate.Aluno (
-    Id_Aluno INT PRIMARY KEY IDENTITY(1,1),
+    Id_Aluno INT,
+    Turma VARCHAR(1),
+
     Nome VARCHAR(50),
     Sobrenome VARCHAR(50),
     CPF BIGINT,
     EMail VARCHAR(30),
     Celular BIGINT,
-    Data_Nascimento DATE
+    Data_Nascimento DATE,
+
+    CONSTRAINT PK_Aluno PRIMARY KEY (Id_Aluno, Turma)
 );
+
 
 CREATE TABLE Karate.Pagamento (
     Cod_Pgmnto INT PRIMARY KEY IDENTITY(1,1),
@@ -163,3 +168,40 @@ add Turma varchar(1)
 FOREIGN KEY(Turma) REFERENCES Karate.Turmas (Turma)
 
 SELECT * from Karate.HorariosAula
+-- atualiza tabela matricula para nova lógica(remove id_Prof da tabela e adiciona coluna dataMatricula);
+
+alter table Karate.Matricula
+ADD dataMatricula date not NULL
+
+alter table karate.Matricula
+drop CONSTRAINT [FK__Matrícula__Id_Pr__71F1E3A2]
+
+alter table karate.Matricula
+drop column Id_Prof
+
+--------
+
+alter TABLE karate.pagamento
+add Turma VARCHAR(1)
+
+ALTER TABLE karate.Pagamento
+ADD CONSTRAINT FK_Pagamento_Id_Aluno FOREIGN KEY (Id_Aluno,Turma) REFERENCES Karate.Aluno(Id_Aluno,Turma)
+
+
+alter table Karate.Matricula
+add turma VARCHAR(1)
+
+ALTER TABLE karate.Matricula
+ADD CONSTRAINT FK_Matricula_Id_Aluno FOREIGN KEY (Id_Aluno,Turma) REFERENCES Karate.Aluno(Id_Aluno,Turma)
+
+alter TABLE Karate.Professor
+drop column Turma
+
+--adiciona mais dados a tabela professor
+alter table Karate.Professor
+add CPF char(11), Sexo char(1),Telefone varchar(11)
+
+
+--adiciona coluna Banido a tabela aluno para saber se ele está banido, caso estiver banido ele tem uma divida ao dojo, só sera desbanido após pagar a divida.
+ALTER TABLE Karate.Aluno
+alter COLUMN Banido CHAR(1) not null;
