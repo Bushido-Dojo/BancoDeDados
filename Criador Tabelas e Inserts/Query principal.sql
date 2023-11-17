@@ -205,3 +205,8 @@ add CPF char(11), Sexo char(1),Telefone varchar(11)
 --adiciona coluna Banido a tabela aluno para saber se ele está banido, caso estiver banido ele tem uma divida ao dojo, só sera desbanido após pagar a divida.
 ALTER TABLE Karate.Aluno
 alter COLUMN Banido CHAR(1) not null;
+
+
+select * from Karate.Aluno
+
+select * from Karate.Matricula
