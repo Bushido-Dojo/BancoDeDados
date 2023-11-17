@@ -32,42 +32,48 @@ BEGIN
 
             end
             insert into Karate.Matricula(Id_Aluno,ultimoPgto,proxPgto,dataMatricula,turma)
-            VALUES(@id_aluno,GETDATE(),DATEADD(day,30,GETDATE()),GETDATE(),(select turma from Karate.Aluno where id_aluno = @id_aluno))
+            VALUES(@id_aluno,GETDATE(),DATEADD(month,1,GETDATE()),GETDATE(),(select turma from Karate.Aluno where id_aluno = @id_aluno))
 
         END
 
-        DECLARE @daysDiff INT;
-        SET @daysDiff = DATEDIFF(DAY, @ultimoPgto, GETDATE());
+        DECLARE @proximoPgto  DATE
 
-        IF (@daysDiff < 0)
+        select @proximoPgto = proxPgto from karate.matricula where id_aluno = @id_aluno
+
+        if(GETDATE()>=@proximoPgto)
         BEGIN
-            RAISERROR('A data do pagamento � inv�lida', 16, 1);
-        END
-        ELSE IF (@daysDiff BETWEEN 0 AND 30)
-        BEGIN
-            SET @valorParcela = @valorParcela;
-        END
-        ELSE IF (@daysDiff BETWEEN 31 AND 60)
-        BEGIN
-            SET @valorParcela = @valorParcela + @valorMulta;
-        END
-        ELSE IF (@daysDiff BETWEEN 61 AND 90)
-        BEGIN
-            SET @valorParcela = (@valorParcela * 2) + @valorMulta;
-        END
-        ELSE
-        BEGIN
-            DELETE FROM Karate.Matricula WHERE Id_Aluno = @Id_Aluno;
-            RAISERROR('Matr�cula deletada. Prazo de pagamento ultrapassado.', 16, 1);
+            DECLARE @diasAtraso INT = DATEDIFF(day,@proximoPgto,GETDATE())
+            if(@diasAtraso<=15)
+            begin 
+                set @valorParcela = @valorParcela
+            END
+
+            else if(@diasAtraso>15 and @diasAtraso <= 30 )
+            BEGIN
+                set @valorParcela = @valorParcela + @valorMulta
+            END
+            else if(@diasAtraso>30 and @diasAtraso <= 45)
+            BEGIN
+                set @valorParcela = (@valorParcela * 2) + @valorMulta
+            END
+            else if(@diasAtraso > 45 and @diasAtraso <=60)
+            BEGIN
+                SET @valorParcela = (@valorparcela *2) + (@valorMulta * 2)
+            END
+            else if (@diasAtraso >60)
+            BEGIN
+                DELETE FROM Karate.Matricula WHERE Id_Aluno = @Id_Aluno;
+                RAISERROR('Matr�cula deletada. Prazo de pagamento ultrapassado.', 16, 1);
             
-            update Karate.Aluno
-            set Banido = 'S'
-            where id_aluno = @id_aluno
+                update Karate.Aluno
+                set Banido = 'S'
+                where id_aluno = @id_aluno
+            END
         END
 
         UPDATE Karate.Matricula
         SET ultimoPgto = GETDATE(),
-            proxPgto = DATEADD(DAY, 30, GETDATE())
+            proxPgto = DATEADD(month, 1, GETDATE())
         WHERE Id_Aluno = @Id_Aluno;
 
         INSERT INTO Karate.Pagamento (Id_Aluno, valorPago, dataPgto,Turma)
