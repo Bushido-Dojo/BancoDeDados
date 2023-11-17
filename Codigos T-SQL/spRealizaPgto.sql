@@ -62,9 +62,7 @@ BEGIN
             END
             else if (@diasAtraso >60)
             BEGIN
-                DELETE FROM Karate.Matricula WHERE Id_Aluno = @Id_Aluno;
                 RAISERROR('Matr�cula deletada. Prazo de pagamento ultrapassado.', 16, 1);
-            
                 update Karate.Aluno
                 set Banido = 'S'
                 where id_aluno = @id_aluno
