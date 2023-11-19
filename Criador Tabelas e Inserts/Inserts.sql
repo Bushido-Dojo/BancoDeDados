@@ -52,6 +52,3 @@ set Turma = 'B'
 where Id_Prof = 2
 
 
-
-delete from Karate.HorariosAula
-where id_Horario BETWEEN 11 and 20

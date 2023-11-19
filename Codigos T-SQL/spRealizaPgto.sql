@@ -27,12 +27,12 @@ BEGIN
             BEGIN
                 set @valorParcela = (@valorParcela * 3) + (@valorMulta * 2)
                 
-                INSERT INTO Karate.Pagamento (Id_Aluno, valorPago, dataPgto,Turma)
-                VALUES (@Id_Aluno, @valorParcela, GETDATE(),(select turma from Karate.Aluno where id_aluno = @id_aluno));
+                INSERT INTO Karate.Pagamento (Id_Aluno, valorPago, dataPgto)
+                VALUES (@Id_Aluno, @valorParcela, GETDATE());
 
             end
-            insert into Karate.Matricula(Id_Aluno,ultimoPgto,proxPgto,dataMatricula,turma)
-            VALUES(@id_aluno,GETDATE(),DATEADD(month,1,GETDATE()),GETDATE(),(select turma from Karate.Aluno where id_aluno = @id_aluno))
+            insert into Karate.Matricula(Id_Aluno,ultimoPgto,proxPgto,dataMatricula)
+            VALUES(@id_aluno,GETDATE(),DATEADD(month,1,@ultimoPgto),GETDATE())
 
         END
 
@@ -70,12 +70,14 @@ BEGIN
         END
 
         UPDATE Karate.Matricula
-        SET ultimoPgto = GETDATE(),
-            proxPgto = DATEADD(month, 1, GETDATE())
+
+        SET proxPgto = DATEADD(month, 1,ultimoPgto),
+        ultimoPgto = GETDATE()
+            
         WHERE Id_Aluno = @Id_Aluno;
 
-        INSERT INTO Karate.Pagamento (Id_Aluno, valorPago, dataPgto,Turma)
-        VALUES (@Id_Aluno, @valorParcela, GETDATE(),(select turma from Karate.Aluno where id_aluno = @id_aluno));
+        INSERT INTO Karate.Pagamento (Id_Aluno, valorPago, dataPgto)
+        VALUES (@Id_Aluno, @valorParcela, GETDATE());
 
         COMMIT TRANSACTION;
 END

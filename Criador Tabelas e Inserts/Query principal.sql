@@ -210,5 +210,12 @@ alter COLUMN Banido CHAR(1) not null;
 select * from Karate.Aluno
 
 select * from Karate.Matricula
+select * from Karate.Pagamento
 
+
+SELECT * FROM Karate.MatriculasAtrasadas
+
+select * from Karate.Faixa
+
+SELECT Karate.fnEncontraDiasAtrasados('2023-04-09') AS DiasAtraso;
 
