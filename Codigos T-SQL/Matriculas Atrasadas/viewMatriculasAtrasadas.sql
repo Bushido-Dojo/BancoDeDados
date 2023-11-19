@@ -4,9 +4,9 @@ CREATE or alter view Karate.MatriculasAtrasadas as SELECT
     Karate.spEncontraDataLimiteParcela(M.ProxPgto) as DataLimiteParcela,
 
     case WHEN Karate.spEncontraDataLimiteParcela(M.ProxPgto) < GETDATE() THEN
-        DATEDIFF(day,Karate.spEncontraDataLimiteParcela(M.ProxPgto),getdate())
+        Karate.spEncontraDiasAtrasados(Karate.spEncontraDataLimiteParcela(M.ProxPgto))
         END
     as DiasAtraso,
 
-
-    case when Karate.spEncontraDataLimiteParcela(M.ProxPgto) 
+    case when Karate.spEncontraDiasAtrasados(Karate.spEncontraDataLimiteParcela(M.proxPgto)) > 30 then
+    

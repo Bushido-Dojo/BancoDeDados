@@ -6,17 +6,16 @@ CREATE TABLE Karate.Faixa (
 );
 
 CREATE TABLE Karate.Aluno (
-    Id_Aluno INT,
-    Turma VARCHAR(1),
-
-    Nome VARCHAR(50),
-    Sobrenome VARCHAR(50),
-    CPF BIGINT,
-    EMail VARCHAR(30),
-    Celular BIGINT,
-    Data_Nascimento DATE,
-
-    CONSTRAINT PK_Aluno PRIMARY KEY (Id_Aluno, Turma)
+    Id_Aluno INT identity(1,1) not null,
+    Id_Faixa INT not NULL,
+    Nome VARCHAR(50) not null,
+    Sobrenome VARCHAR(50) not null,
+    CPF CHAR(11) not null,
+    EMail VARCHAR(50),
+    Celular char(11),
+    Data_Nascimento DATE not null,
+    Banido char(1) not null,
+    CONSTRAINT PK_Aluno PRIMARY KEY (Id_Aluno)
 );
 
 
@@ -27,6 +26,7 @@ CREATE TABLE Karate.Pagamento (
 
     FOREIGN KEY (Id_Aluno) REFERENCES Karate.Aluno(Id_Aluno)
 );
+
 
 CREATE TABLE Karate.Matr�cula (
     Id_Matricula INT PRIMARY KEY IDENTITY (1,1),
@@ -210,3 +210,5 @@ alter COLUMN Banido CHAR(1) not null;
 select * from Karate.Aluno
 
 select * from Karate.Matricula
+
+
