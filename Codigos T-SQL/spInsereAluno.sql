@@ -1,5 +1,5 @@
 create or alter PROCEDURE Karate.spInsereAluno
-@nome varCHAR, @sobrenome VARCHAR, @cpf CHAR(11), @email VARCHAR(50), @celular char(11), @dataNascimento DATE
+@nome varCHAR(20), @sobrenome VARCHAR(20), @cpf CHAR(14), @email VARCHAR(50), @celular char(11), @dataNascimento DATE
 as
 BEGIN
 
