@@ -1,6 +1,6 @@
-CREATE TRIGGER Karate.trMatriculaAtrasada
+CREATE or alter TRIGGER Karate.trMatriculaAtrasada
 ON Karate.Matricula
-AFTER UPDATE
+AFTER UPDATE, insert
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -13,4 +13,4 @@ BEGIN
 
     DELETE FROM Karate.Matricula
     WHERE DATEDIFF(MONTH, proxPgto, GETDATE()) > 3;
-END;
+END

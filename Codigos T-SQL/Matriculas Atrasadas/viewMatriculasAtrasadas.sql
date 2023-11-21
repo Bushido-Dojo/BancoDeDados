@@ -11,10 +11,7 @@ CREATE or alter view Karate.MatriculasAtrasadas as SELECT
     case when dateadd(MONTH,1,M.proxPgto) < GETDATE() then
         DATEDIFF(month,M.proxPgto,GETDATE())
         END
-    as ParcelasAtraso,
-
-    
-    A.Banido
+    as ParcelasAtraso
 
 
     FROM Karate.Matricula M 

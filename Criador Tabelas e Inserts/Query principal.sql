@@ -219,3 +219,4 @@ select * from Karate.Faixa
 
 SELECT Karate.fnEncontraDiasAtrasados('2023-04-09') AS DiasAtraso;
 
+exec karate.spRealizaPgto 1
