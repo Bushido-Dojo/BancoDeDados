@@ -217,6 +217,13 @@ SELECT * FROM Karate.MatriculasAtrasadas
 
 select * from Karate.Faixa
 
-SELECT Karate.fnEncontraDiasAtrasados('2023-04-09') AS DiasAtraso;
 
-exec karate.spRealizaPgto 1
+
+CREATE TABLE Karate.ADM(
+    Id_Adm int IDENTITY (1,1) not null,
+    nome VARCHAR(20) not null,
+    cpf CHAR(14) NOT NULL,
+    senha VARCHAR(20) not NULL,
+    PRIMARY KEY (Id_Adm)
+)
+

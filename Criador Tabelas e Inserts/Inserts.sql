@@ -55,3 +55,11 @@ where Id_Prof = 2
 EXEC Karate.spInsereAluno @nome = 'Julio Cesar', @sobrenome = 'Dourado', @cpf = '123-416-782-62', @email = 'juliocelarr@gmail.com', @celular = '19988228553', @dataNascimento = '1990-01-01'
 
 delete Karate.Aluno WHERE Id_Aluno = 51
+
+
+--Insert Tabela ADM
+
+INSERT INTO Karate.ADM (nome,cpf,senha) VALUES ('Pedro Sápiras','168.388.312-90','BloodsADM')
+
+
+
