@@ -221,9 +221,8 @@ select * from Karate.Faixa
 
 CREATE TABLE Karate.ADM(
     Id_Adm int IDENTITY (1,1) not null,
-    nome VARCHAR(20) not null,
+    username VARCHAR(20) not null,
     cpf CHAR(14) NOT NULL,
     senha VARCHAR(20) not NULL,
     PRIMARY KEY (Id_Adm)
 )
-
