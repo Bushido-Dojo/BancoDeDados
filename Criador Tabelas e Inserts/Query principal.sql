@@ -226,3 +226,6 @@ CREATE TABLE Karate.ADM(
     senha VARCHAR(20) not NULL,
     PRIMARY KEY (Id_Adm)
 )
+
+
+exec Karate.spRealizaPgto 48
