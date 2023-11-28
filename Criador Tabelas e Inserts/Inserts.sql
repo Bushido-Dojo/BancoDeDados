@@ -52,10 +52,9 @@ set Turma = 'B'
 where Id_Prof = 2
 
 
-EXEC Karate.spInsereAluno @nome = 'Julio Cesar', @sobrenome = 'Dourado', @cpf = '123-416-782-62', @email = 'juliocelarr@gmail.com', @celular = '19988228553', @dataNascimento = '1990-01-01'
-
+EXEC Karate.spInsereAluno 0,'Joao Paulo','530.213.123-02',
 delete Karate.Aluno WHERE Id_Aluno = 51
-
+select * from Karate.Aluno
 
 --Insert Tabela ADM
 

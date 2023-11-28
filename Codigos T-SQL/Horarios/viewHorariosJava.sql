@@ -11,4 +11,3 @@ P.Nome, H.HorarioInicio,
         Karate.Professor P on P.id_Prof = H.id_Prof
     
     where 1>0
-
