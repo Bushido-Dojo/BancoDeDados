@@ -60,7 +60,7 @@ BEGIN
         RETURN;
     END
 
-    IF LEN(@celular) !=11
+    IF LEN(@celular) !=14
     BEGIN
         RAISERROR('Celular do aluno deve conter 11 dígitos.', 16, 1)
         ROLLBACK TRANSACTION;
@@ -94,7 +94,12 @@ BEGIN
         ROLLBACK TRANSACTION;
         RETURN;
     END
-
+    IF EXISTS (SELECT celular FROM Karate.Aluno WHERE celular = @celular AND Id_Aluno != @Id_Aluno)
+    BEGIN
+        RAISERROR('Celular já cadastrado.', 16, 1)
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
     -- Se todas as condições forem atendidas, o trigger continua sem erros
     PRINT @Id_Aluno
 END

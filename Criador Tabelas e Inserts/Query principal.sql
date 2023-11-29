@@ -36,11 +36,15 @@ CREATE TABLE Karate.Matr�cula (
     FOREIGN KEY (Id_Prof) REFERENCES Karate.Professor(Id_Prof)
 );
 
-CREATE TABLE Karate.Professor (
-    Id_Prof INT PRIMARY KEY IDENTITY(1,1),
-    Nome VARCHAR(50),
-    Horarios DATETIME
-);
+create table Karate.Professor(
+	Id_Prof int identity(1,1) primary key,
+	nome varchar (20) not null,
+	sobrenome varchar(20) not null,
+	CPF char(14) not null,
+	sexo char(1) not null,
+	telefone char(14) not null,
+	dataCadastro date not null
+	)
 
 ALTER TABLE Karate.Pagamento
 ADD CONSTRAINT FK_Matricula_Pagamento

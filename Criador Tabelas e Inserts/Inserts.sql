@@ -52,8 +52,7 @@ set Turma = 'B'
 where Id_Prof = 2
 
 
-EXEC Karate.spInsereAluno 0,'Joao Paulo','530.213.123-02',
-delete Karate.Aluno WHERE Id_Aluno = 51
+
 select * from Karate.Aluno
 
 --Insert Tabela ADM
