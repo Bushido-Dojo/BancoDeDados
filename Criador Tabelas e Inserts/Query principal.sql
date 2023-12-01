@@ -233,3 +233,7 @@ CREATE TABLE Karate.ADM(
 
 
 exec Karate.spRealizaPgto 48
+
+
+alter TABLE Karate.Aluno
+alter COLUMN senha VARCHAR(150);

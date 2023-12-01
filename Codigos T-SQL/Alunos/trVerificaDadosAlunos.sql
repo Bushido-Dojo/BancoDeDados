@@ -5,7 +5,7 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    declare @Id_Faixa int, @nome varchar(50), @sobrenome varchar(50), @cpf CHAR(14), @email VARCHAR(50), @celular char(11), @dataNascimento DATE, @Id_Aluno INT
+    declare @Id_Faixa int, @nome varchar(50), @sobrenome varchar(50), @cpf CHAR(14), @email VARCHAR(50), @celular char(14), @dataNascimento DATE, @Id_Aluno INT
 
     SELECT TOP 1 @Id_Faixa = Id_Faixa,
                  @nome = nome,
@@ -60,12 +60,15 @@ BEGIN
         RETURN;
     END
 
-    IF LEN(@celular) !=14
+    IF LEN(@celular) != 14
     BEGIN
-        RAISERROR('Celular do aluno deve conter 11 dígitos.', 16, 1)
+        DECLARE @msgErro VARCHAR(100)
+        SET @msgErro = 'Celular do aluno contém ' + CAST(LEN(@celular) AS VARCHAR) + ' dígitos: ' + @celular
+        RAISERROR(@msgErro, 16, 1)
         ROLLBACK TRANSACTION;
         RETURN;
     END
+
 
     IF @dataNascimento > GETDATE()
     BEGIN
