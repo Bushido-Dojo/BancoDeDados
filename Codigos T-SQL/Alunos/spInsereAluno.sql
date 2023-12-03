@@ -1,5 +1,5 @@
 create or alter PROCEDURE Karate.spInsereAluno
-@Id_Faixa INT,@nome CHAR(20), @sobrenome VARCHAR(20), @cpf CHAR(14), @email VARCHAR(50), @celular char(14), @dataNascimento DATE, @senha VARCHAR(150)
+@Id_Faixa INT,@nome varchar(50), @sobrenome VARCHAR(50), @cpf CHAR(14), @email VARCHAR(50), @celular char(14), @dataNascimento DATE, @senha VARCHAR(150)
 as
 BEGIN
 

@@ -25,7 +25,7 @@ BEGIN
         BEGIN
             if((select Banido from Karate.Aluno where id_aluno = @id_aluno) = 'S')
             BEGIN
-                set @valorParcela = (@valorParcela * 3) + (@valorMulta * 2)
+                set @valorParcela = (@valorParcela * 4) + (@valorMulta * 3)
                 
                 INSERT INTO Karate.Pagamento (Id_Aluno, valorPago, dataPgto)
                 VALUES (@Id_Aluno, @valorParcela, GETDATE());
@@ -40,34 +40,22 @@ BEGIN
 
         select @proximoPgto = proxPgto from karate.matricula where id_aluno = @id_aluno
 
-        if(GETDATE()>=@proximoPgto)
+        if(GETDATE()>= dateadd(day,15,@proximoPgto))
         BEGIN
-            DECLARE @diasAtraso INT = DATEDIFF(day,@proximoPgto,GETDATE())
-            if(@diasAtraso<=15)
+            DECLARE @diasAtraso INT = DATEDIFF(day,dateadd(day,15,@proximoPgto),GETDATE())
+            if(@diasAtraso<=0)
             begin 
                 set @valorParcela = @valorParcela
             END
 
-            else if(@diasAtraso>15 and @diasAtraso <= 30 )
+            else if(@diasAtraso>=1 and @diasAtraso <= 30 )
             BEGIN
                 set @valorParcela = @valorParcela + @valorMulta
             END
-            else if(@diasAtraso>30 and @diasAtraso <= 45)
+            else if(@diasAtraso>30 and @diasAtraso<=60)
             BEGIN
-                set @valorParcela = (@valorParcela * 2) + @valorMulta
+                set @valorParcela = (@valorParcela * 2) + (@valorMulta*2)
             END
-            else if(@diasAtraso > 45 and @diasAtraso <=60)
-            BEGIN
-                SET @valorParcela = (@valorparcela *2) + (@valorMulta * 2)
-            END
-            else if (@diasAtraso >60)
-            BEGIN
-                RAISERROR('Matr�cula deletada. Prazo de pagamento ultrapassado.', 16, 1);
-                update Karate.Aluno
-                set Banido = 'S'
-                where id_aluno = @id_aluno
-            END
-        END
 
         UPDATE Karate.Matricula
 
@@ -80,4 +68,5 @@ BEGIN
         VALUES (@Id_Aluno, @valorParcela, GETDATE());
 
         COMMIT TRANSACTION;
-END
+        END
+        END

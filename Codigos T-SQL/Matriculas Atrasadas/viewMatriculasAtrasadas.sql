@@ -17,5 +17,4 @@ CREATE or alter view Karate.MatriculasAtrasadas as SELECT
     FROM Karate.Matricula M 
     JOIN Karate.Aluno A ON M.Id_Aluno = A.Id_Aluno
     JOIN Karate.Faixa F ON A.Id_Faixa = F.Id_Faixa
-    WHERE Karate.Matricula is not NULL;
-
+    WHERE M.proxPgto<GETDATE();

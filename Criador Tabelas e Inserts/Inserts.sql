@@ -65,5 +65,3 @@ add senha varchar(20)
 
 exec Karate.spInsereAluno @Id_Faixa = 0, @nome = 'Marcacalho',@sobrenome = 'Juliovagores', @cpf = '654.434.565-12',@email ='kuliarno@gmail.com',@celular ='(19)98320-2803',@dataNascimento = '2001-04-14',@senha = 'senhaboaa'
 
-
-delete Karate.Aluno where Id_Aluno BETWEEN 77 and 100
