@@ -232,4 +232,8 @@ CREATE TABLE Karate.ADM(
 )
 
 
-SELECT * FROM Karate.Aluno WHERE id_aluno = 1
+SELECT * FROM Karate.viewMatriculas
+
+exec Karate.spRealizaPgtos 116
+
+delete Karate.Aluno where Id_Aluno = 116

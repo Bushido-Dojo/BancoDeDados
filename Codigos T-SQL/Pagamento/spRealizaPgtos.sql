@@ -1,8 +1,7 @@
-CREATE OR ALTER PROCEDURE Karate.spRealizaPgto
+CREATE OR ALTER PROCEDURE Karate.spRealizaPgtos
 @Id_Aluno INT
 AS
 BEGIN
-        BEGIN TRANSACTION;
 
         DECLARE @ultimoPgto DATE, @dataMatricula date;
 
@@ -32,7 +31,7 @@ BEGIN
 
             end
             insert into Karate.Matricula(Id_Aluno,ultimoPgto,proxPgto,dataMatricula)
-            VALUES(@id_aluno,GETDATE(),DATEADD(month,1,@ultimoPgto),GETDATE())
+            VALUES(@id_aluno,GETDATE(),DATEADD(month,1,GETDATE()),GETDATE())
 
         END
 
@@ -66,7 +65,5 @@ BEGIN
 
         INSERT INTO Karate.Pagamento (Id_Aluno, valorPago, dataPgto)
         VALUES (@Id_Aluno, @valorParcela, GETDATE());
-
-        COMMIT TRANSACTION;
-        END
-        END
+    END
+END
