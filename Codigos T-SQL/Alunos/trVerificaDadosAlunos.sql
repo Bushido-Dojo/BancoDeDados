@@ -32,16 +32,16 @@ BEGIN
         RETURN;
     END
 
-    IF (PATINDEX('%[^0-9.-]%', @cpf) != 0)
+     IF LEN(@cpf) != 14
     BEGIN
-        RAISERROR('CPF do aluno deve conter apenas números.', 16, 1)
+        RAISERROR('CPF do aluno deve conter 11 dígitos.', 16, 1)
         ROLLBACK TRANSACTION;
         RETURN;
     END
 
-    IF LEN(@cpf) != 14
+    IF (PATINDEX('%[^0-9.-]%', @cpf) != 0)
     BEGIN
-        RAISERROR('CPF do aluno deve conter 11 dígitos.', 16, 1)
+        RAISERROR('CPF do aluno deve conter apenas números.', 16, 1)
         ROLLBACK TRANSACTION;
         RETURN;
     END
@@ -53,7 +53,7 @@ BEGIN
         RETURN;
     END
 
-    IF (PATINDEX('%[^0-9()-]%', @celular) <> 0)
+    IF (PATINDEX('%[^0-9()-]%', @celular) != 0)
     BEGIN
         RAISERROR('Celular do aluno deve conter apenas números.', 16, 1)
         ROLLBACK TRANSACTION;

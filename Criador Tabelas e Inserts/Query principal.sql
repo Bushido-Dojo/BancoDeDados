@@ -236,4 +236,6 @@ SELECT * FROM Karate.viewMatriculas
 
 exec Karate.spRealizaPgtos 116
 
-delete Karate.Aluno where Id_Aluno = 116
+delete Karate.Aluno where Id_Aluno = 217
+
+select * from Karate.Aluno
