@@ -1,13 +1,1 @@
-NÃO ESQUECER DE SEPARAR PROCEDURE DE APAGAR MATRICULAS ATRASADAS DE REALIZAR PAGAMENTO DA MENSALIDADE.
 
-DETECTAR MATRICULAS ATRASADAS ATRÁVES DE VIEWS, CASO ESTIVER ATRASADA APERTAR BOTÃO E SELECIONAR ALUNO COM MENSALIDADE ATRASADA
-PARA EXECUTAR PROCEDURE QUE APAGA MATRICULA. APAGAR APENAS AS COM MAIS DE 90 APÓS ULTIMO PAGAMENTO.(60 DIAS DE ATRASO)
-
-
-E ATUALIZAR DIAGRAMA DO GITHUB
-
-
-
-
-
-qual seria a logica de pagamento, vamos supor que no dia 10 de maio foi feita a matricula, no dia 10 do proximo mês a parcela abre denovo para pagar, ele tem 15 dias para pagar, após isso pagará a parcela mais a multa. se ja chegou no dia 10 de junho e ele não pagou a primeira, terá que pagar as duas e ele tem mais 15 dias para pagar a parcela de junho sem pagar multa. se chegou no dia do pagamento de julho e ele não pagou, colocar a conta dele como suspensa por atrasar 3 parcelas
